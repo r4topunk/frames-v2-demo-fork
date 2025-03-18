@@ -1,14 +1,17 @@
 "use client"
 
-import { Discussion } from "@hiveio/dhive"
 import dynamic from "next/dynamic"
 
-const Discussions = dynamic(() => import("~/components/Discusstions"), {
+const Post = dynamic(() => import("~/components/Post"), {
   ssr: false,
 })
 
 export default function App(
-  { discussions }: { discussions: Discussion[] } = { discussions: [] }
+  { post }: { post: string[] } = {
+    post: ["hive-173115", "@samuelvelizsk8", "fegxlhrj"],
+  }
 ) {
-  return <Discussions discussions={discussions} />
+  console.log({ post })
+  const [tag, user, postId] = post
+  return <Post author={user} permlink={postId} />
 }
